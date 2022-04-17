@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .form:hover {
   box-shadow: -1px 0px 54px 9px rgba(54,54,54,0.75);
   -webkit-box-shadow: -1px 0px 54px 9px rgba(54,54,54,0.75);
@@ -15,30 +22,32 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 .form {
+  margin: 30px 0;
   background: #fff;
   width: 350px;
-  margin: 100px auto;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   box-shadow: 0 2px 25px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease-in-out;
 }
-h5{
-  margin: 10px;
-}
+
 .portal{
-  padding: 35px 35px 0 95px;
+  padding-top: 35px;
+  text-align: center;
   font-weight: 600;
   font-size: large;
 }
 
 .input-container{
-  padding: 12px 30px;
   width: 100%;
   height: auto;
-  margin-bottom: 5px;
+  margin: 20px auto;
+  width: 80%;
   display: flex;
+  align-items: center;
 }
+
 .input-container input {
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
@@ -49,6 +58,7 @@ h5{
   transition: all .2s;
 }
 .button-container {
+  margin-top: 20px;
   display: flex;
 }
 .button-container button  {
@@ -82,15 +92,26 @@ h5{
 
 .input-field {
   width: 100%;
-  padding: 10px;
+  margin: 2px;
+  transition: all 0.3s ease-in-out;
+  appearance: none;
+  border-bottom-color: black !important; 
+  border-radius: 3px;
+}
+.input-field:hover,
+.input-field:focus {
+  transform: scale(1.03);
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
+  border-bottom-color: #7e7e7ef1 !important;
 }
 
-.input-field:focus {
-  border: 2px solid rgb(0, 0, 0);
-}
 
 .icons{
- position: relative;
+  margin-right: 10px;
 }
 
 .signout{
@@ -113,15 +134,23 @@ h5{
   background: black;
 }
 
-.form a.link {
+.form button.link {
+  background: none;
+  display: flex;
+  border: 0;
+  margin: 20px auto;
   text-decoration: none;
   color: #747474;
   letter-spacing: 0.2px;
   text-transform: uppercase;
-  display: inline-block;
-  margin-top: 20px;
-  padding: 0 35px 15px 80px;
+  transition: all 0.3s ease-in-out;
+  font-size: 12px;
 }
+.form button.link:hover {
+  cursor: pointer;
+  color: #3494e6;
+}
+
 .error{
   color: #ff3333;
   font-size: 10px;
