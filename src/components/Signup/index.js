@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './styles.css'
+import '../../App.css'
 
 const CONTAINS_NUMBER = /\d/;
 export const CONTAINS_UPPER = /[A-Z]/;
