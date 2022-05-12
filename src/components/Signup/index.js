@@ -7,17 +7,19 @@ const CONTAINS_SPECIAL_CHAR = /[~`!@#$%^&*+=\-[\]\\';,/{}()_|":<>?]/;
 
 export default function Signup(props) {
   const { handleSignupCancel, setShowLogin, setShowSignup } = props.handlers;
+  const [hasTenDigits, setHasTenDigits] = useState(false);
+  const [setStudentID] = useState('')
   const [hasNumeric, setHasNumeric] = useState(false);
   const [hasEightCharacters, setHasEightCharacters] = useState(false);
   const [hasSpecialCharacters, setHasSpecialCharacters] = useState(false);
   const [hasUpper, setHasUpper] = useState(false);
   const [password, setPassword] = useState('')
   const [passwordMatch, setPasswordMatch] = useState(true)
-  const [showPassword, setShowPassword] = useState(false)
+
+  
 
   const formValues = [];
   const fields = [
-    "Student ID Number",
     "Last Name",
     "Given Name",
     "Middle Name",
@@ -25,7 +27,6 @@ export default function Signup(props) {
     "Program Enrolled",
     "Year Level",
   ];
-
   const studentDetails = fields.map((fieldName, key) => (
     <div className="input-container" key={key}>
       <input
@@ -55,6 +56,11 @@ export default function Signup(props) {
     handleSignupSubmit();
   }
 
+  function handleValidateStudentID(event){
+    const { value } = event.target;
+    setHasTenDigits(value.length === 10);
+    
+  }
   function handleValidatePassword(event) {
     const { value } = event.target;
 
@@ -64,7 +70,11 @@ export default function Signup(props) {
     setHasNumeric(CONTAINS_NUMBER.test(value));
     setPasswordMatch(value === password);
   }
-
+  const studentIdRequirements=(
+    <>
+      <p>{hasTenDigits ? '✅' : '❌'} should be 10 digits</p>
+    </>
+  )
   const passwordRequirements = (
     <>
       <p>{hasEightCharacters ? '✅' : '❌'} at least 8 characters</p>
@@ -75,6 +85,9 @@ export default function Signup(props) {
   );
   const passwordMatchWarn = passwordMatch ? '' : <p>❌ password does not match</p>; 
 
+  function handleStudentIDInput(event) {
+    setStudentID(event.target.value);
+  }
   function handlePasswordInput(event) {
     setPassword(event.target.value);
   }
@@ -83,38 +96,49 @@ export default function Signup(props) {
 
     setPasswordMatch(value === password);
   }
-  function handleShowPassword() {
-    setShowPassword(!showPassword)
-  }
 
   return (
     <div className="form">
       <label className="portal">STUDENT SIGNUP</label>
       <form onSubmit={handleSubmit}>
+      <div className="input-container">
+          <input
+            className="input-field"
+            type="text"
+            placeholder="Student ID Number"
+            name="uname"
+            required
+            onKeyUp={handleValidateStudentID}
+            onChange={handleStudentIDInput}
+          />
+      </div>
+        <div className="inputRequirementDiv">
+          {studentIdRequirements}
+        </div>
         {studentDetails}
         <div className="input-container">
           <input
             className="input-field"
-            type={showPassword ? "input" : "password"}
+            type="password"
             placeholder="Password"
             name="uname"
             required
             onKeyUp={handleValidatePassword}
             onChange={handlePasswordInput}
           />
-          <button type="button" onClick={handleShowPassword}>{showPassword ? 'Hide' : 'Show'}</button>
+        
         </div>
         <div className="input-container">
           <input
             className="input-field"
-            type={showPassword ? "input" : "password"}
+            type="password"
             placeholder="Confirm Password"
             name="uname"
             required
             onKeyUp={validatePassword}
           />
         </div>
-        <div className="passwordRequirementDiv">
+        <div className="inputRequirementDiv">
           {passwordMatchWarn}
           {passwordRequirements}
         </div>
@@ -125,12 +149,14 @@ export default function Signup(props) {
           <button
             type="submit"
             disabled={(
+            
               !passwordMatch
               || !password
               || !hasNumeric
               || !hasEightCharacters
               || !hasSpecialCharacters
               || !hasUpper
+              || !hasTenDigits
             )??'disabled'}
           >
             Signup

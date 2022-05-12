@@ -12,7 +12,7 @@ export default function Login(props) {
   const database = [
     {
       username: "2018111635",
-      password: "1234",
+      password: "Josh123!",
     },
     {
       username: "2018889437",
