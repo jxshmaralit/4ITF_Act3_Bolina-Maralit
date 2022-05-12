@@ -16,7 +16,7 @@ export default function Login(props) {
     },
     {
       username: "2018889437",
-      password: "2468",
+      password: "Ced246?",
     },
   ];
 
