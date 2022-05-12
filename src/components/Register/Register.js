@@ -16,8 +16,6 @@ export default function Signup(props) {
   const [password, setPassword] = useState('')
   const [passwordMatch, setPasswordMatch] = useState(true)
 
-  
-
   const formValues = [];
   const fields = [
     "Last Name",
@@ -47,10 +45,10 @@ export default function Signup(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const FIELD_COUNT = event.target.length - 5;
+    const FIELD_COUNT = event.target.length - 4;
 
     for (let FIELD = 0; FIELD < FIELD_COUNT; FIELD++) {
-      formValues.push(`👉🏼${fields[FIELD]}: ${event.target[FIELD].value}`);
+      formValues.push(`👉🏼 ${event.target[FIELD].value}`);
     }
 
     handleSignupSubmit();
@@ -72,7 +70,7 @@ export default function Signup(props) {
   }
   const studentIdRequirements=(
     <>
-      <p>{hasTenDigits ? '✅' : '❌'} should be 10 digits</p>
+      <p>{hasTenDigits ? '✅' : '❌'} must be 10 digits</p>
     </>
   )
   const passwordRequirements = (
@@ -84,7 +82,7 @@ export default function Signup(props) {
     </>
   );
   const passwordMatchWarn = passwordMatch ? '' : <p>❌ password does not match</p>; 
-
+  
   function handleStudentIDInput(event) {
     setStudentID(event.target.value);
   }
